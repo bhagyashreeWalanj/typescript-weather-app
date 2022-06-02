@@ -4,6 +4,7 @@ import { baseAuth } from './api/authProvider'
 import LeftPanel from './components/LeftPanel'
 import Search from './components/Search'
 import RightPanel from './components/RightPanel'
+import Footer from './components/Footer'
 
 export const ContextProvider = createContext({})
 
@@ -85,31 +86,36 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-6 h-screen p-5">
-        {/* left Side Panel */}
-        <aside className="col-span-1 lg:col-span-2 bg-blue-lighter h-full">
-          <LeftPanel
-            data={currentWeather}
-            toggle={toggle}
-            setToggle={setToggle}
-            error={error}
-          />
-          <Search
-            toggle={toggle}
-            setToggle={setToggle}
-            handleOnSearch={(place) => handleOnSearch(place)}
-          />
-        </aside>
+    <>
+      <div className="h-screen overflow-x-hidden">
+        <main className="mx-auto h-full">
+          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-6 h-screen p-5">
+            {/* left Side Panel */}
+            <aside className="col-span-1 lg:col-span-2 bg-blue-lighter h-full">
+              <LeftPanel
+                data={currentWeather}
+                toggle={toggle}
+                setToggle={setToggle}
+                error={error}
+              />
+              <Search
+                toggle={toggle}
+                setToggle={setToggle}
+                handleOnSearch={(place) => handleOnSearch(place)}
+              />
+            </aside>
 
-        {/* right side panel */}
-        <ContextProvider.Provider value={currentWeather}>
-          <aside className="col-span-1 lg:col-span-4 bg-blue-dark h-full ">
-            <RightPanel data={currentWeather} />
-          </aside>
-        </ContextProvider.Provider>
+            {/* right side panel */}
+            <ContextProvider.Provider value={currentWeather}>
+              <aside className="col-span-1 lg:col-span-4 bg-blue-dark h-full ">
+                <RightPanel data={currentWeather} />
+              </aside>
+            </ContextProvider.Provider>
+          </div>
+        </main>
       </div>
-    </div>
+      <Footer />
+    </>
   )
 }
 

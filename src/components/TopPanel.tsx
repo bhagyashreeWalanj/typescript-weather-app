@@ -1,5 +1,4 @@
 import React from 'react'
-import { IWeather } from '../interfaces/IWeather'
 
 interface ICard {
   id: number
